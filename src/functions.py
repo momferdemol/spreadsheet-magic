@@ -1,15 +1,6 @@
-import openpyxl
 
-def load_data():
-
-    inventory_file = openpyxl.load_workbook("./input/inventory.xlsx")
-    raw_data = inventory_file["DataSheet"]
-    return raw_data
-
-def products_per_supplier():
+def products_per_supplier(product_list):
     
-    product_list = load_data()
-
     products_per_supplier = {}
     
     for product_row in range(2, product_list.max_row + 1):
