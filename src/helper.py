@@ -1,7 +1,22 @@
 import openpyxl
+from datetime import datetime
+
 
 def load_data():
-    # load spreadsheet as 'raw_data' for processing
+    # load spreadsheet
     inventory_file = openpyxl.load_workbook("./input/inventory.xlsx")
-    raw_data = inventory_file["DataSheet"]
-    return raw_data
+    return inventory_file
+
+
+def save_data(inventory_file):
+    # save spreadsheet as file with new data to output folder
+    isFileSaved = True
+    try:
+        today_date = datetime.today().strftime('%d-%m-%Y %H.%M')
+        filepath = f"./output/inventory {today_date}.xlsx"
+        inventory_file.save(filepath)
+    except ValueError:
+        isFileSaved = False
+        SystemExit
+    
+    return isFileSaved
